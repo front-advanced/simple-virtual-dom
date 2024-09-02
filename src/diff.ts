@@ -2,15 +2,15 @@ import { Element } from "./element";
 import { listDiff } from "./listDiff";
 
 //  Nodes are different, replace the old with the new
-const REPLACE = 'REPLACE';
+export const REPLACE = 'REPLACE';
 // List REORDER
-const REORDER = 'REORDER';
+export const REORDER = 'REORDER';
 // Props change
-const PROPS = 'PROPS';
+export const PROPS = 'PROPS';
 // Text change
-const TEXT = 'TEXT';
+export const TEXT = 'TEXT';
 
-interface Move {
+export interface Move {
   index: number;
   type: number;
   item?: { key: string } | string | { render: () => Node };
