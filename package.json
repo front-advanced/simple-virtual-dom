@@ -1,0 +1,30 @@
+{
+  "name": "simple-virtual-dom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsup src/main.ts --watch",
+    "serve": "lite-server",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/front-advanced/simple-virtual-dom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/front-advanced/simple-virtual-dom/issues"
+  },
+  "homepage": "https://github.com/front-advanced/simple-virtual-dom#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.2",
+    "jsdom": "^25.0.0",
+    "lite-server": "^2.6.1",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}
