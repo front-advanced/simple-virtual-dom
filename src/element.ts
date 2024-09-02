@@ -11,14 +11,9 @@ export class Element {
     this.children = children || [];
     this.key = props.key;
     
-    let count = 0;
-    this.children.forEach((child) => {
-      if (child instanceof Element) {
-        count += child.count;
-      }
-      count++;
-    });
-    this.count = count;
+    this.count = this.children.reduce((count, child) => {
+      return count + (child instanceof Element ? child.count : 0);
+    }, this.children.length);
   }
 
   render(): HTMLElement {
@@ -27,7 +22,13 @@ export class Element {
     // Set properties
     for (const [key, value] of Object.entries(this.props)) {
       if (key !== 'key') {
-        el.setAttribute(key, value);
+        if (key === 'className') {
+          el.setAttribute('class', value);
+        } else if (key === 'style' && typeof value === 'object') {
+          Object.assign(el.style, value);
+        } else {
+          el.setAttribute(key, value);
+        }
       }
     }
     

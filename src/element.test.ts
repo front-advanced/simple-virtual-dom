@@ -1,17 +1,18 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Element } from './element';
+import { createElement } from './createElement';
 
 describe('Element', () => {
   let root: Element;
   
   beforeEach(() => {
-    root = new Element('div', { id: 'root' }, [
-      new Element('span', { class: 'greeting' }, ['Hello']),
-      new Element('ul', {}, [
-        new Element('li', {}, ['Item 1']),
-        new Element('li', {}, ['Item 2']),
-      ]),
-    ]);
+    root = createElement('div', { id: 'root' },
+      createElement('span', { className: 'greeting' }, 'Hello'),
+      createElement('ul', null,
+        createElement('li', null, 'Item 1'),
+        createElement('li', null, 'Item 2')
+      )
+    );
   });
 
   it('should create an instance with correct properties', () => {
@@ -20,12 +21,11 @@ describe('Element', () => {
     expect(root.props.id).toBe('root');
     expect(root.children).toHaveLength(2);
     expect(root.key).toBeUndefined();
-    console.log('root',root)
     expect(root.count).toBe(7);
   });
 
   it('should create an instance with a key', () => {
-    const el = new Element('div', { key: 'test-key' }, []);
+    const el = createElement('div', { key: 'test-key' });
     expect(el.key).toBe('test-key');
   });
 
@@ -47,5 +47,12 @@ describe('Element', () => {
     expect(ul.children[0].textContent).toBe('Item 1');
     expect(ul.children[1].tagName).toBe('LI');
     expect(ul.children[1].textContent).toBe('Item 2');
+  });
+
+  it('should handle style objects', () => {
+    const el = createElement('div', { style: { color: 'red', fontSize: '14px' } });
+    const rendered = el.render();
+    expect(rendered.style.color).toBe('red');
+    expect(rendered.style.fontSize).toBe('14px');
   });
 });
